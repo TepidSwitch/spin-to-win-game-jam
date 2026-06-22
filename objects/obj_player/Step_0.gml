@@ -1,3 +1,9 @@
+// HP
+if (hp <= 0) {
+    hp = 3;
+    room_goto(rm_1);
+}
+
 // I Framing
 if (inv_timer > 0) {
     inv_timer--;

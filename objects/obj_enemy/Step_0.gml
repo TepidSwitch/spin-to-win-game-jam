@@ -30,7 +30,6 @@ switch(state) {
             hit.hp--;
             hit.invincible = true;
             hit.inv_timer = 60;
-            if (hit.hp <= 0) room_restart();
         }
         
         if (state_timer <= 0) {
