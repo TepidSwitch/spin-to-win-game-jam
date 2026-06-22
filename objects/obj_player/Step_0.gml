@@ -1,5 +1,6 @@
 // HP
-if (hp <= 0) {
+if (hp <= 0 and !is_dead) {
+    is_dead = true;
     hp = 3;
     room_goto(rm_1);
 }
@@ -31,7 +32,7 @@ if (!is_dodging and dodge_cd_timer == 0) {
         dodge_cd_timer = dodge_cd;
         invincible = true;
         
-        dodge_spd = 8;
+        dodge_spd = dodge_spd_default;
         dodge_timer = dodge_dur;
         
         if (charge_timer >= charge_time_needed) {

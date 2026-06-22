@@ -1,4 +1,5 @@
 // Collision debug overlay
+// TODO: refactor this or get rid of it when we are done
 with (all) {
     draw_set_alpha(0.4);
     draw_set_color(c_lime);
@@ -8,6 +9,7 @@ with (all) {
 
 
 // HUD
+if (!instance_exists(obj_player)) exit;
 var p = obj_player;
 
 // HP
