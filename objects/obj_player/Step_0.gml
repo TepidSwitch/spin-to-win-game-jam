@@ -15,8 +15,8 @@ if (inv_timer > 0) {
 if (dodge_cd_timer > 0) dodge_cd_timer--;
     
 // Dodge Input
-var dodge_key = keyboard_check(vk_space);
-var dodge_released = keyboard_check_released(vk_space);
+var dodge_key = keyboard_check(vk_space) or keyboard_check(ord("J"));
+var dodge_released = keyboard_check_released(vk_space) or keyboard_check_released(ord("J"));
 
 if (!is_dodging and dodge_cd_timer == 0) {
     
@@ -27,7 +27,6 @@ if (!is_dodging and dodge_cd_timer == 0) {
     
     if (dodge_released and is_charging) {
         is_charging = false;
-        
         is_dodging = true;
         dodge_cd_timer = dodge_cd;
         invincible = true;
@@ -45,26 +44,26 @@ if (!is_dodging and dodge_cd_timer == 0) {
     }
 }
 
-// Movement
+// Dodging
 if (is_dodging) {
+    // Passes through enemies 
     dodge_timer--;
     
     var dx = lengthdir_x(dodge_spd, dir);
     var dy = lengthdir_y(dodge_spd, dir);
     
-    if (!place_meeting(x + dx, y, obj_wall)) {
-        x += dx;
-    }
-    if (!place_meeting(x, y + dy, obj_wall)) {
-        y += dy;
-    }
-    
-    if (dodge_timer <= 0) {
-        is_dodging = false;
-    }
-} else {
-    var input_x = keyboard_check(ord("D")) - keyboard_check(ord("A"));
-    var input_y = keyboard_check(ord("S")) - keyboard_check(ord("W"));
+    if (!wall_check(id, x + dx, y)) x += dx;
+    if (!wall_check(id, x, y + dy)) y += dy;
+    if (dodge_timer <= 0) is_dodging = false;
+        
+}
+
+if (!is_dodging) {
+    // Does not pass through enemies when moving normally
+    var input_x = (keyboard_check(ord("D")) or keyboard_check(vk_right))
+                - (keyboard_check(ord("A")) or keyboard_check(vk_left));
+    var input_y = (keyboard_check(ord("S")) or keyboard_check(vk_down))
+                - (keyboard_check(ord("W")) or keyboard_check(vk_up));
     
     if (input_x != 0 or input_y != 0) {
         dir = point_direction(0, 0, input_x, -input_y) // remember Y is flipped in GML
@@ -76,15 +75,8 @@ if (is_dodging) {
         }
     }
     
-    if (input_x != 0) {
-        if (!place_meeting(x + input_x * spd, y, obj_wall)) {
-            x += input_x * spd;
-        }
-    }
-    
-    if (input_y != 0) {
-        if (!place_meeting(x, y + input_y * spd, obj_wall)) {
-            y += input_y * spd;
-        }
-    }
+    if (input_x != 0 and !wall_check(id, x + input_x * spd, y)
+        and !place_meeting(x + input_x * spd, y, obj_en)) x += input_x * spd;
+    if (input_y != 0 and !wall_check(id, x, y + input_y * spd)
+        and !place_meeting(x, y + input_y * spd, obj_en)) y += input_y * spd;
 }

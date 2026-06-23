@@ -22,8 +22,8 @@ switch(state) {
         var dx = lengthdir_x(attack_spd, attack_dir);
         var dy = lengthdir_y(attack_spd, attack_dir);
         
-        if (!place_meeting(x + dx, y, obj_wall)) x += dx;
-        if (!place_meeting(x, y + dy, obj_wall)) y += dy;
+        if (!wall_check(id, x + dx, y)) x += dx;
+        if (!wall_check(id, x, y + dy)) y += dy;
         
         // enemy is hitbox, later imlement obj_enemy_attack for hitbox
         var hit = instance_place(x, y, obj_player);
