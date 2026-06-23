@@ -11,6 +11,7 @@ with (all) {
 // HUD
 if (!instance_exists(obj_player)) exit;
 var p = obj_player;
+draw_set_font(fnt_default);
 
 // HP
 draw_set_color(c_white);
