@@ -19,12 +19,15 @@ switch(state) {
     break;
 
     case "attacking": 
-        x += lengthdir_x(attack_spd, attack_dir);
-        y += lengthdir_y(attack_spd, attack_dir);
+        var dx = lengthdir_x(attack_spd, attack_dir);
+        var dy = lengthdir_y(attack_spd, attack_dir);
+        
+        if (!place_meeting(x + dx, y, obj_wall)) x += dx;
+        if (!place_meeting(x, y + dy, obj_wall)) y += dy;
         
         // enemy is hitbox, later imlement obj_enemy_attack for hitbox
         var hit = instance_place(x, y, obj_player);
-        if (hit != noone && !hit.invincible) {
+        if (hit != noone and !hit.invincible) {
             hit.take_damage();
         }
         
@@ -32,5 +35,6 @@ switch(state) {
             state = "idle";
             state_timer = idle_duration;
         }
+    break;
         
 }

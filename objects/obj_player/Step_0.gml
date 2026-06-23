@@ -2,7 +2,7 @@
 if (hp <= 0 and !is_dead) {
     is_dead = true;
     hp = 3;
-    room_goto(rm_1);
+    room_goto(rm_game_over);
 }
 
 // I Framing
@@ -45,26 +45,46 @@ if (!is_dodging and dodge_cd_timer == 0) {
     }
 }
 
-// Dodge Movement
+// Movement
 if (is_dodging) {
     dodge_timer--;
     
-    x += lengthdir_x(dodge_spd, dir);
-    y += lengthdir_y(dodge_spd, dir);
+    var dx = lengthdir_x(dodge_spd, dir);
+    var dy = lengthdir_y(dodge_spd, dir);
+    
+    if (!place_meeting(x + dx, y, obj_wall)) {
+        x += dx;
+    }
+    if (!place_meeting(x, y + dy, obj_wall)) {
+        y += dy;
+    }
     
     if (dodge_timer <= 0) {
         is_dodging = false;
     }
-}
-
-// "Traditional" Movement
-if  (!is_dodging) {
+} else {
     var input_x = keyboard_check(ord("D")) - keyboard_check(ord("A"));
     var input_y = keyboard_check(ord("S")) - keyboard_check(ord("W"));
     
     if (input_x != 0 or input_y != 0) {
         dir = point_direction(0, 0, input_x, -input_y) // remember Y is flipped in GML
-        x += input_x * spd;
-        y += input_y * spd;
+    } else if (!is_charging) {
+        // face away from nearest enemy when standing still
+        if (instance_exists(obj_en)) {
+            var nearest = instance_nearest(x, y, obj_en);
+            dir = point_direction(nearest.x, nearest.y, x, y);
+        }
+    }
+    
+    if (input_x != 0) {
+        if (!place_meeting(x + input_x * spd, y, obj_wall)) {
+            x += input_x * spd;
+        }
+    }
+    
+    if (input_y != 0) {
+        if (!place_meeting(x, y + input_y * spd, obj_wall)) {
+            y += input_y * spd;
+        }
     }
 }

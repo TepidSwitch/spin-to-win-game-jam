@@ -5,9 +5,10 @@ var y2 = y1 + sprite_height;
 
 if (state == "telegraph") {
     draw_set_color(c_red);
-}
-else {
+} else if (state == "returning") {
     draw_set_color(c_yellow);
+} else {
+    draw_set_color(c_orange);
 }
 
 draw_rectangle(x1, y1, x2, y2, false);

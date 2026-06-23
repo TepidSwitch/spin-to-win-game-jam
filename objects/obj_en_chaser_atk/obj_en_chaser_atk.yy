@@ -1,15 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_enemy_attack",
+  "%Name":"obj_en_chaser_atk",
   "eventList":[],
   "managed":true,
-  "name":"obj_enemy_attack",
+  "name":"obj_en_chaser_atk",
   "overriddenProperties":[],
   "parent":{
-    "name":"Game",
-    "path":"folders/Objects/Game.yy",
+    "name":"Enemies",
+    "path":"folders/Objects/Game/NPC/Enemies.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_en_atk",
+    "path":"objects/obj_en_atk/obj_en_atk.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
