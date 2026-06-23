@@ -19,7 +19,7 @@ draw_rectangle(x1, y1, x2, y2, false);
 draw_set_color(c_black);
 draw_circle(
     x + lengthdir_x(sprite_width * 0.75, dir),
-    y - lengthdir_y(sprite_width * 0.75, dir), // Y is negated in GML!!!!!
+    y + lengthdir_y(sprite_width * 0.75, dir),
     3,
     false);
 

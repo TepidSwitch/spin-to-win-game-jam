@@ -66,7 +66,7 @@ if (!is_dodging) {
                 - (keyboard_check(ord("W")) or keyboard_check(vk_up));
     
     if (input_x != 0 or input_y != 0) {
-        dir = point_direction(0, 0, input_x, -input_y) // remember Y is flipped in GML
+        dir = point_direction(0, 0, input_x, input_y)
     } else if (!is_charging) {
         // face away from nearest enemy when standing still
         if (instance_exists(obj_en)) {
