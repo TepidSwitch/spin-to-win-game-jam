@@ -1,7 +1,7 @@
 // HP
 if (hp <= 0 and !is_dead) {
     is_dead = true;
-    hp = 3;
+    // hp = 3;
     room_goto(rm_game_over);
 }
 
@@ -31,7 +31,7 @@ if (!is_dodging and dodge_cd_timer == 0) {
         dodge_cd_timer = dodge_cd;
         invincible = true;
         
-        dodge_spd = dodge_spd_default;
+        dodge_spd = DODGE_SPD_DEFAULT;
         dodge_timer = dodge_dur;
         
         if (charge_timer >= charge_time_needed) {
@@ -54,11 +54,32 @@ if (is_dodging) {
     
     if (!wall_check(id, x + dx, y)) x += dx;
     if (!wall_check(id, x, y + dy)) y += dy;
-    if (dodge_timer <= 0) is_dodging = false;
+    if (dodge_timer <= 0) { 
+        is_dodging = false;
+        
+        // Don't get caught inside an enemy
+        if (place_meeting(x, y, obj_en)) {
+            var push_dir = point_direction(x, y, obj_en.x, obj_en.y);
+            push_dir = (push_dir + 180) mod 360; // flip it around
+            var push_dist = 0;
+            
+            // TODO: this is hardcoded to a 32 pixel big player and enemy. Future proof it
+            while (place_meeting(x, y, obj_en) and push_dist < 64) {
+                var nx = x + lengthdir_x(1, push_dir);
+                var ny = y + lengthdir_y(1, push_dir);
+                
+                if (wall_check(id, nx, ny)) break;
+                    
+                x = nx;
+                y = ny;
+                push_dist++;
+            }
+        }
+    }
         
 }
 
-if (!is_dodging) {
+if (!is_dodging and !is_charging) {
     // Does not pass through enemies when moving normally
     var input_x = (keyboard_check(ord("D")) or keyboard_check(vk_right))
                 - (keyboard_check(ord("A")) or keyboard_check(vk_left));
@@ -67,7 +88,7 @@ if (!is_dodging) {
     
     if (input_x != 0 or input_y != 0) {
         dir = point_direction(0, 0, input_x, input_y)
-    } else if (!is_charging) {
+    } else {
         // face away from nearest enemy when standing still
         if (instance_exists(obj_en)) {
             var nearest = instance_nearest(x, y, obj_en);
@@ -79,4 +100,11 @@ if (!is_dodging) {
         and !place_meeting(x + input_x * spd, y, obj_en)) x += input_x * spd;
     if (input_y != 0 and !wall_check(id, x, y + input_y * spd)
         and !place_meeting(x, y + input_y * spd, obj_en)) y += input_y * spd;
+}
+
+// Reset to first level button
+if (keyboard_check_pressed(ord("R"))) {
+    hp = HP_DEFAULT;
+    is_dead = false;
+    room_goto(rm_1);
 }

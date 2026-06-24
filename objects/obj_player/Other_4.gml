@@ -1,4 +1,8 @@
-// Persistent, so we set the starting position in every room here
-x = 100;
-y = room_height / 2;
-is_dead = false;
+// Persistent, show up in any room that isn't win or lose room
+if (room == rm_game_over or room == rm_win) {
+    visible = false;
+} else {
+    visible = true;
+    x = 100;
+    y = room_height / 2;
+}
