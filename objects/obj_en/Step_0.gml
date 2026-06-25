@@ -1,52 +1,20 @@
 state_timer--;
 
 switch(state) {
-    case "idle":
-        if (state_timer <= 0) {
-            state = "telegraph";
-            state_timer = telegraph_duration;
-            // Lock it in
-            attack_dir = point_direction(x, y, target.x, target.y);
-        }
-    break;
+    case "idle":        on_idle();          break;
+    case "telegraph":   on_telegraph();     break;
+    case "attacking":   on_attacking();     break;
+    case "returning":   on_returning();     break;
+}
 
-    case "telegraph":
-        if (state_timer <= 0) {
-            state = "attacking";
-            state_timer = attack_duration;
-        }
-    break;
-
-    case "attacking": 
-        var dx = lengthdir_x(attack_spd, attack_dir);
-        var dy = lengthdir_y(attack_spd, attack_dir);
-        
-        if (!wall_check(id, x + dx, y)) x += dx;
-        if (!wall_check(id, x, y + dy)) y += dy;
-        
-        
-        if (state_timer <= 0) state = "returning";
-    break;
-        
-    case "returning":
-        if (instance_exists(atk_obj)) {
-            instance_destroy(atk_obj);
-            atk_obj = noone;
-        }
-        
-        var dist = point_distance(x, y, start_x, start_y);
-        if (dist > return_spd) {
-            var return_dir = point_direction(x, y, start_x, start_y);
-            var rx = lengthdir_x(return_spd, return_dir);
-            var ry = lengthdir_y(return_spd, return_dir);
-            
-            if (!wall_check(id, x + rx, y)) x += rx;
-            if (!wall_check(id, x, y + ry)) y += ry;
-        } else {
-            x = start_x;
-            y = start_y;
-            state = "idle";
-            state_timer = idle_duration;
-        }
-    break;
+// Make sure the enemy body doesn't get stuck inside the player
+var _hit = instance_place(x, y, obj_player);
+if (_hit != noone) {
+    var _push_dir = point_direction(_hit.x, _hit.y, x, y);
+    var _push_dist = 0;
+    while (instance_place(x, y, obj_player) != noone and _push_dist < 32) {
+        x += lengthdir_x(1, _push_dir);
+        y += lengthdir_y(1, _push_dir);
+        _push_dist++;
+    }
 }
