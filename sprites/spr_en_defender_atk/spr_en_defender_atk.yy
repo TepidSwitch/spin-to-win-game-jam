@@ -23,7 +23,7 @@
   ],
   "name":"spr_en_defender_atk",
   "nineSlice":null,
-  "origin":4,
+  "origin":1,
   "parent":{
     "name":"Enemies",
     "path":"folders/Sprites/NPCs/Enemies.yy",
@@ -76,7 +76,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":32,
-    "yorigin":16,
+    "yorigin":0,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

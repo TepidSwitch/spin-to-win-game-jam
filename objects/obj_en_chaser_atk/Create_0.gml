@@ -1,7 +1,7 @@
 // Inherit the parent event
 event_inherited();
 
-lance_offset = 20;
+lance_offset = 30;
 
 on_hit = function() {
     if (instance_exists(creator)) {

@@ -51,6 +51,7 @@
     {"id":{"name":"rm_win","path":"rooms/rm_win/rm_win.yy",},},
     {"id":{"name":"wall_check","path":"scripts/wall_check/wall_check.yy",},},
     {"id":{"name":"spr_door","path":"sprites/spr_door/spr_door.yy",},},
+    {"id":{"name":"spr_en_atk","path":"sprites/spr_en_atk/spr_en_atk.yy",},},
     {"id":{"name":"spr_en_chaser_atk","path":"sprites/spr_en_chaser_atk/spr_en_chaser_atk.yy",},},
     {"id":{"name":"spr_en_defender_atk","path":"sprites/spr_en_defender_atk/spr_en_defender_atk.yy",},},
     {"id":{"name":"spr_en","path":"sprites/spr_en/spr_en.yy",},},

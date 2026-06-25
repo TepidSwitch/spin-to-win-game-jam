@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_en_atk",
+    "path":"sprites/spr_en_atk/spr_en_atk.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
