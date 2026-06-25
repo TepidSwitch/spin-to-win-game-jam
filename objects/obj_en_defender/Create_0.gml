@@ -7,7 +7,7 @@ on_attacking = function() {
     if (!wall_check(id, x, y + dy)) y += dy;
         
     if (atk_obj == noone) {
-        atk_obj = instance_create_layer(x, y, "Instances", obj_en_defender_atk);
+        atk_obj = instance_create_layer(x, y, "Attacks", obj_en_defender_atk);
         atk_obj.creator = id;
     }
     
