@@ -25,13 +25,16 @@ switch(state) {
         if (!wall_check(id, x + dx, y)) x += dx;
         if (!wall_check(id, x, y + dy)) y += dy;
         
-        // enemy is hitbox, later imlement obj_enemy_attack for hitbox
-        var hit = instance_place(x, y, obj_player);
-        if (hit != noone and !hit.invincible) {
-            hit.take_damage();
+        if (atk_obj == noone) {
+            atk_obj = instance_create_layer(x, y, "Instances", obj_en_chaser_atk);
+            atk_obj.creator = id;
         }
         
         if (state_timer <= 0) {
+            if (instance_exists(atk_obj)) {
+                instance_destroy(atk_obj);
+                atk_obj = noone;
+            }
             state = "idle";
             state_timer = idle_duration;
         }

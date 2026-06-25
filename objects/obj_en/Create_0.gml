@@ -2,6 +2,8 @@ target = obj_player;
 state = "idle";
 state_timer = 0;
 
+atk_obj = noone;
+
 // Levers
 idle_duration       = 60;
 telegraph_duration  = 40;

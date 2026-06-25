@@ -24,13 +24,16 @@ switch(state) {
         if (!wall_check(id, x + dx, y)) x += dx;
         if (!wall_check(id, x, y + dy)) y += dy;
         
-        var hit = instance_place(x, y, obj_player);
-        if (hit != noone) hit.take_damage();
         
         if (state_timer <= 0) state = "returning";
     break;
         
     case "returning":
+        if (instance_exists(atk_obj)) {
+            instance_destroy(atk_obj);
+            atk_obj = noone;
+        }
+        
         var dist = point_distance(x, y, start_x, start_y);
         if (dist > return_spd) {
             var return_dir = point_direction(x, y, start_x, start_y);

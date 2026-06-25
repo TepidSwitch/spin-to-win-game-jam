@@ -12,7 +12,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Enemies",
-    "path":"folders/Objects/Game/NPC/Enemies.yy",
+    "path":"folders/Objects/Game/NPCs/Enemies.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_enemy",
-    "path":"sprites/spr_enemy/spr_enemy.yy",
+    "name":"spr_en",
+    "path":"sprites/spr_en/spr_en.yy",
   },
   "spriteMaskId":null,
   "visible":true,

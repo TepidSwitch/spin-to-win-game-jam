@@ -11,6 +11,12 @@ if (inv_timer > 0) {
     invincible = (inv_timer > 0);
 }
 
+// Knockback
+x += kb_x;
+y += kb_y;
+kb_x *= kb_friction;
+kb_y *= kb_friction;
+
 // Cooldown
 if (dodge_cd_timer > 0) dodge_cd_timer--;
     
