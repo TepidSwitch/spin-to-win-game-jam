@@ -1,5 +1,7 @@
 display_set_gui_size(640, 352);
 
+is_paused = false;
+
 current_level = 0;
 
 levels = [

@@ -38,3 +38,17 @@ if (p.is_charging) {
     draw_set_color(c_white);
     draw_text(8, 58, "CHARGE");
 }
+
+// Pause
+if (is_paused) {
+    draw_set_alpha(0.5);
+    draw_set_color(c_black);
+    draw_rectangle(0, 0, 640, 352, false);
+    draw_set_alpha(1);
+    draw_set_color(c_white);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_text(320, 160, "PAUSED");
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
+}

@@ -1,3 +1,5 @@
+if (obj_game_manager.is_paused) exit;
+
 state_timer--;
 
 switch(state) {

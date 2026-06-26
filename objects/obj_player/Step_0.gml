@@ -1,3 +1,13 @@
+// PAUSE
+if (obj_game_manager.is_paused) {
+    if (keyboard_check_pressed(ord("R"))) {
+        hp = HP_DEFAULT;
+        is_dead = false;
+        room_goto(rm_1);
+    }
+    exit;
+}
+
 // HP
 if (hp <= 0 and !is_dead) {
     is_dead = true;

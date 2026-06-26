@@ -1,3 +1,5 @@
+if (obj_game_manager.is_paused) exit;
+
 if (!instance_exists(creator)) {
     instance_destroy();
     exit;
