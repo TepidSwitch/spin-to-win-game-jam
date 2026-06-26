@@ -22,8 +22,17 @@ if (inv_timer > 0) {
 }
 
 // Knockback
-x += kb_x;
-y += kb_y;
+if (!wall_check(id, x + kb_x, y)) {
+    x += kb_x;
+} else {
+    kb_x = 0;
+}
+if (!wall_check(id, x, y + kb_y)) {
+    y += kb_y;
+} else {
+    kb_y = 0;
+}
+
 kb_x *= kb_friction;
 kb_y *= kb_friction;
 
