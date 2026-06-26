@@ -23,6 +23,8 @@ charged_dodge_spd = 11;
 
 is_charging = false;
 
+charge_needs_repress = false;
+
 // I Frame Tracking
 invincible = false;
 inv_timer = 0;
@@ -43,6 +45,11 @@ take_damage = function(_attacker_x, _attacker_y) {
     if (invincible) exit;
         
     hp--;
+    
+    is_charging = false;
+    charge_timer = 0;
+    charge_needs_repress = true;
+    
     invincible = true;
     inv_timer = hit_inv_duration;
     

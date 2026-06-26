@@ -1,3 +1,9 @@
+// Reset charge state
+is_charging = false;
+charge_timer = 0;
+var dodge_key = keyboard_check(vk_space) or keyboard_check(ord("J"));
+charge_needs_repress = dodge_key; // if still holding on room start, ensure player lets go to start the charge againd
+
 // Persistent, show up in any room that isn't win or lose room
 if (room == rm_game_over or room == rm_win) {
     visible = false;

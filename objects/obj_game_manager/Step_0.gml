@@ -1,1 +1,1 @@
-// show_debug_overlay(true);
+if (debug_mode) show_debug_overlay(true);
