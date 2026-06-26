@@ -70,3 +70,14 @@ restart_game = function() {
     current_level = 0;
     room_goto(rm_1);
 }
+
+// Input struct 
+controls = {
+    move_left:  [ord("A"), vk_left],
+    move_right: [ord("D"), vk_right],
+    move_up:    [ord("W"), vk_up],
+    move_down:  [ord("S"), vk_down],
+    dodge:      [ord("J"), vk_space],
+    pause:      [ord("P"), vk_escape],
+    restart:    [ord("R")],
+}

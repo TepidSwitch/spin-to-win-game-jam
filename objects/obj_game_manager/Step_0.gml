@@ -1,5 +1,5 @@
 if (debug_mode) show_debug_overlay(true);
 
-if (keyboard_check_pressed(vk_escape) or keyboard_check_pressed(ord("P"))) {
+if (input_check_pressed(controls.pause)) {
     is_paused = !is_paused;
 }

@@ -1,6 +1,8 @@
+var ctrl = obj_game_manager.controls;
+
 // PAUSE
 if (obj_game_manager.is_paused) {
-    if (keyboard_check_pressed(ord("R"))) obj_game_manager.restart_game();
+    if (input_check_pressed(ctrl.restart)) obj_game_manager.restart_game();
     exit;
 }
 
@@ -36,14 +38,14 @@ kb_y *= kb_friction;
 if (dodge_cd_timer > 0) dodge_cd_timer--;
     
 // Dodge Input
-var dodge_key = keyboard_check(vk_space) or keyboard_check(ord("J"));
-var dodge_released = keyboard_check_released(vk_space) or keyboard_check_released(ord("J"));
+var dodge_held = input_check(ctrl.dodge);
+var dodge_released = input_check_released(ctrl.dodge);
 
 if (!is_dodging and dodge_cd_timer == 0) {
     
     if (dodge_released) charge_needs_repress = false;
     
-    if (dodge_key and !charge_needs_repress) {
+    if (dodge_held and !charge_needs_repress) {
         is_charging = true;
         charge_timer++;
     }
@@ -77,6 +79,7 @@ if (is_dodging) {
     
     if (!wall_check(id, x + dx, y)) x += dx;
     if (!wall_check(id, x, y + dy)) y += dy;
+        
     if (dodge_timer <= 0) { 
         is_dodging = false;
         
@@ -103,10 +106,8 @@ if (is_dodging) {
 
 if (!is_dodging and !is_charging) {
     // Does not pass through enemies when moving normally
-    var input_x = (keyboard_check(ord("D")) or keyboard_check(vk_right))
-                - (keyboard_check(ord("A")) or keyboard_check(vk_left));
-    var input_y = (keyboard_check(ord("S")) or keyboard_check(vk_down))
-                - (keyboard_check(ord("W")) or keyboard_check(vk_up));
+    var input_x = input_check(ctrl.move_right) - input_check(ctrl.move_left);
+    var input_y = input_check(ctrl.move_down) - input_check(ctrl.move_up);
     
     if (input_x != 0 or input_y != 0) {
         dir = point_direction(0, 0, input_x, input_y)
@@ -124,4 +125,4 @@ if (!is_dodging and !is_charging) {
         and !place_meeting(x, y + input_y * spd, obj_en)) y += input_y * spd;
 }
 
-if (keyboard_check_pressed(ord("R"))) obj_game_manager.restart_game();
+if (input_check_pressed(ctrl.restart)) obj_game_manager.restart_game();
