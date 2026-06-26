@@ -1,0 +1,1 @@
+if (room == rm_1) load_level(current_level);

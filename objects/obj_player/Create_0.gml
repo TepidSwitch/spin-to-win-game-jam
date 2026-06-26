@@ -38,7 +38,7 @@ is_dead = false;
 // Knockback
 kb_x = 0;
 kb_y = 0;
-kb_friction = 0.75 // tunable
+kb_friction = 0.5 // tunable
 
 // Helper Methods
 take_damage = function(_attacker_x, _attacker_y) {

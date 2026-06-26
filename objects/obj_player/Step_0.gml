@@ -1,10 +1,6 @@
 // PAUSE
 if (obj_game_manager.is_paused) {
-    if (keyboard_check_pressed(ord("R"))) {
-        hp = HP_DEFAULT;
-        is_dead = false;
-        room_goto(rm_1);
-    }
+    if (keyboard_check_pressed(ord("R"))) obj_game_manager.restart_game();
     exit;
 }
 
@@ -128,9 +124,4 @@ if (!is_dodging and !is_charging) {
         and !place_meeting(x, y + input_y * spd, obj_en)) y += input_y * spd;
 }
 
-// Reset to first level button
-if (keyboard_check_pressed(ord("R"))) {
-    hp = HP_DEFAULT;
-    is_dead = false;
-    room_goto(rm_1);
-}
+if (keyboard_check_pressed(ord("R"))) obj_game_manager.restart_game();

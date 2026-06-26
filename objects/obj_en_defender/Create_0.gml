@@ -8,11 +8,7 @@ atk_obj.y = y + lengthdir_y(atk_obj.shield_offset, attack_dir);
 atk_obj.image_angle = attack_dir + 90;
 
 on_attacking = function() {
-    var dx = lengthdir_x(attack_spd, attack_dir);
-    var dy = lengthdir_y(attack_spd, attack_dir);
-    if (!wall_check(id, x + dx, y)) x += dx;
-    if (!wall_check(id, x, y + dy)) y += dy;
-    
+    move_with_collision(attack_spd, attack_dir);
     if (state_timer <= 0) state = "returning";
 };
 
@@ -21,12 +17,7 @@ on_returning = function() {
     
     if (dist > return_spd) {
         var return_dir = point_direction(x, y, start_x, start_y);
-        
-        var rx = lengthdir_x(return_spd, return_dir);
-        var ry = lengthdir_y(return_spd, return_dir);
-        
-        if (!wall_check(id, x + rx, y)) x += rx;
-        if (!wall_check(id, x, y + ry)) y += ry;
+        move_with_collision(return_spd, return_dir);
     } else {
         x = start_x;
         y = start_y;

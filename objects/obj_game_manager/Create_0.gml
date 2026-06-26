@@ -1,3 +1,8 @@
+if (instance_number(obj_game_manager) > 1) {
+    instance_destroy();
+    exit;
+}
+
 display_set_gui_size(640, 352);
 
 is_paused = false;
@@ -57,4 +62,11 @@ load_level = function(_index) {
     }
 };
 
-load_level(current_level);
+// Helper methods
+restart_game = function() {
+    instance_activate_object(obj_player);
+    obj_player.hp = obj_player.HP_DEFAULT;
+    obj_player.is_dead = false;
+    current_level = 0;
+    room_goto(rm_1);
+}
