@@ -9,7 +9,7 @@ switch(state) {
 
 // Make sure the enemy body doesn't get stuck inside the player
 var _hit = instance_place(x, y, obj_player);
-if (_hit != noone) {
+if (_hit != noone and !_hit.is_dodging) {
     var _push_dir = point_direction(_hit.x, _hit.y, x, y);
     var _push_dist = 0;
     while (instance_place(x, y, obj_player) != noone and _push_dist < 32) {

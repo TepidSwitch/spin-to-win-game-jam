@@ -8,5 +8,5 @@ function wall_check(_inst, _x, _y) {
     return tilemap_get_at_pixel(_tm, _x1, _y1) != 0
         or tilemap_get_at_pixel(_tm, _x2, _y1) != 0
         or tilemap_get_at_pixel(_tm, _x1, _y2) != 0
-        or tilemap_get_at_pixel(_tm, _x2, _y1) != 0;
+        or tilemap_get_at_pixel(_tm, _x2, _y2) != 0;
 }

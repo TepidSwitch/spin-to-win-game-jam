@@ -69,8 +69,7 @@ if (is_dodging) {
             push_dir = (push_dir + 180) mod 360; // flip it around
             var push_dist = 0;
             
-            // TODO: this is hardcoded to a 32 pixel big player and enemy. Future proof it
-            while (place_meeting(x, y, obj_en) and push_dist < 64) {
+            while (place_meeting(x, y, obj_en) and push_dist < (sprite_width + obj_en.sprite_width)) {
                 var nx = x + lengthdir_x(1, push_dir);
                 var ny = y + lengthdir_y(1, push_dir);
                 
