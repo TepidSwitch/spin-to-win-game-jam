@@ -14,30 +14,36 @@ if (debug_mode) {
 if (!instance_exists(obj_player)) exit;
 var p = obj_player;
 draw_set_font(fnt_default);
-
-// HP
-draw_set_color(c_white);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
-draw_text(8, 8, "HP: " + string(p.hp));
 
-// Dodge CD
+// HUD Background
+draw_set_color(c_black);
+draw_set_alpha(0.65);
+draw_rectangle(0, 0, 120, 50, false);
+draw_set_alpha(1);
+
+// HP - filled and empty circles
+var circle_r = 6;
+var circle_gap = 16;
+for (var i = 0; i < p.HP_DEFAULT; i++) {
+    if (i < p.hp) {
+        draw_set_color(c_red);
+        draw_circle(10 + i * circle_gap, 10, circle_r, false);
+    } else {
+        draw_set_color(c_dkgray);
+        draw_circle(10 + i * circle_gap, 10, circle_r, true);
+    }
+}
+
+// Stamina (dodge CD) bar
 var cd_percent = 1 - (p.dodge_cd_timer / p.dodge_cd);
-draw_set_color(c_green);
+draw_set_color(c_dkgray);
 draw_rectangle(8, 24, 108, 32, false);
 draw_set_color(c_aqua);
-draw_rectangle(8, 24, 8 + (100 * cd_percent), 32, false);
+draw_rectangle(8, 24, 8 + floor(100 * cd_percent), 32, false);
 draw_set_color(c_white);
-draw_text(8, 34, "DODGE");
-
-// Charging
-if (p.is_charging) {
-    var charge_percent = clamp(p.charge_timer / p.charge_time_needed, 0, 1);
-    draw_set_color(c_yellow);
-    draw_rectangle(8, 48, 8 +(100 * charge_percent), 56, false);
-    draw_set_color(c_white);
-    draw_text(8, 58, "CHARGE");
-}
+draw_text(8, 34, "STAMINA");
 
 // Pause
 if (is_paused) {

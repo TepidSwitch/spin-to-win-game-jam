@@ -23,4 +23,18 @@ draw_circle(
     3,
     false);
 
+// Charge bar - below the player
+if (is_charging) { 
+    var charge_percent = clamp(charge_timer / charge_time_needed, 0, 1);
+    var bar_w = 32;
+    var bar_h = 4;
+    var bx = x - bar_w / 2;
+    var by = y2 + 4;
+    
+    draw_set_color(c_dkgray);
+    draw_rectangle(bx, by, bx + bar_w, by + bar_h, false);
+    draw_set_color(c_yellow);
+    draw_rectangle(bx, by, bx + floor(bar_w * charge_percent), by + bar_h, false);
+}
+
 draw_set_color(c_white);
