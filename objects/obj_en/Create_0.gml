@@ -5,8 +5,8 @@ state_timer = 0;
 atk_obj = noone;
 
 // Levers
-idle_duration       = 60;
-telegraph_duration  = 40;
+idle_duration       = 40;
+telegraph_duration  = 20;
 attack_duration     = 20;
 attack_spd          = 6;
 return_spd          = 3;
