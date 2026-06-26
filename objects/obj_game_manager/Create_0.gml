@@ -16,6 +16,15 @@ levels = [
         player_x: 96, player_y: 160,
         door_x: 545, door_y: 128,
         enemies: [
+            { type: obj_en_chaser, x: 448, y: 138 },
+            { type: obj_en_chaser, x: 448, y: 224 },
+        ]
+    },
+    // 3 
+    {
+        player_x: 96, player_y: 160,
+        door_x: 545, door_y: 128,
+        enemies: [
             { type: obj_en_chaser, x: 448, y: 96 },
             { type: obj_en_defender, x: 512, y: 160 },
             { type: obj_en_chaser, x: 448, y: 224 },
