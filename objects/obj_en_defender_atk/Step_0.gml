@@ -1,3 +1,4 @@
+is_active = instance_exists(creator) && creator.state == "attacking";
 event_inherited();
 
 if (instance_exists(creator)) {

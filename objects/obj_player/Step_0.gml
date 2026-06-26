@@ -19,6 +19,9 @@ if (inv_timer > 0) {
     invincible = (inv_timer > 0);
 }
 
+// Stun
+if (stun_timer > 0) stun_timer--;
+
 // Knockback
 if (!wall_check(id, x + kb_x, y)) {
     x += kb_x;
@@ -38,36 +41,60 @@ kb_y *= kb_friction;
 if (dodge_cd_timer > 0) dodge_cd_timer--;
     
 // Dodge Input
-var dodge_held = input_check(ctrl.dodge);
-var dodge_released = input_check_released(ctrl.dodge);
-
-if (!is_dodging and dodge_cd_timer == 0) {
+if (stun_timer <= 0) {
+    var dodge_held = input_check(ctrl.dodge);
+    var dodge_released = input_check_released(ctrl.dodge);
     
-    if (dodge_released) charge_needs_repress = false;
-    
-    if (dodge_held and !charge_needs_repress) {
-        is_charging = true;
-        charge_timer++;
-    }
-    
-    if (dodge_released and is_charging) {
-        is_charging = false;
-        is_dodging = true;
-        dodge_cd_timer = dodge_cd;
-        invincible = true;
+    if (!is_dodging and dodge_cd_timer == 0) {
         
-        dodge_spd = DODGE_SPD_DEFAULT;
-        dodge_timer = dodge_dur;
+        if (dodge_released) charge_needs_repress = false;
         
-        if (charge_timer >= charge_time_needed) {
-            dodge_spd = charged_dodge_spd;
-            dodge_timer = charged_dodge_dur;
+        if (dodge_held and !charge_needs_repress) {
+            is_charging = true;
+            charge_timer++; 
         }
         
-        inv_timer = dodge_timer;
-        charge_timer = 0;
+        if (dodge_released and is_charging) {
+            is_charging = false;
+            is_dodging = true;
+            dodge_cd_timer = dodge_cd;
+            invincible = true;
+            
+            dodge_spd = DODGE_SPD_DEFAULT;
+            dodge_timer = dodge_dur;
+            
+            if (charge_timer >= charge_time_needed) {
+                dodge_spd = charged_dodge_spd;
+                dodge_timer = charged_dodge_dur;
+            }
+            
+            inv_timer = dodge_timer;
+            charge_timer = 0;
+        }
+    }
+    
+    if (!is_dodging and !is_charging) {
+        // Does not pass through enemies when moving normally
+        var input_x = input_check(ctrl.move_right) - input_check(ctrl.move_left);
+        var input_y = input_check(ctrl.move_down) - input_check(ctrl.move_up);
+        
+        if (input_x != 0 or input_y != 0) {
+            dir = point_direction(0, 0, input_x, input_y)
+        } else {
+            // face away from nearest enemy when standing still
+            if (instance_exists(obj_en)) {
+                var nearest = instance_nearest(x, y, obj_en);
+                dir = point_direction(nearest.x, nearest.y, x, y);
+            }
+        }
+        
+        if (input_x != 0 and !wall_check(id, x + input_x * spd, y)
+            and !place_meeting(x + input_x * spd, y, obj_en)) x += input_x * spd;
+        if (input_y != 0 and !wall_check(id, x, y + input_y * spd)
+            and !place_meeting(x, y + input_y * spd, obj_en)) y += input_y * spd;
     }
 }
+
 
 // Dodging
 if (is_dodging) {
@@ -102,27 +129,6 @@ if (is_dodging) {
         }
     }
         
-}
-
-if (!is_dodging and !is_charging) {
-    // Does not pass through enemies when moving normally
-    var input_x = input_check(ctrl.move_right) - input_check(ctrl.move_left);
-    var input_y = input_check(ctrl.move_down) - input_check(ctrl.move_up);
-    
-    if (input_x != 0 or input_y != 0) {
-        dir = point_direction(0, 0, input_x, input_y)
-    } else {
-        // face away from nearest enemy when standing still
-        if (instance_exists(obj_en)) {
-            var nearest = instance_nearest(x, y, obj_en);
-            dir = point_direction(nearest.x, nearest.y, x, y);
-        }
-    }
-    
-    if (input_x != 0 and !wall_check(id, x + input_x * spd, y)
-        and !place_meeting(x + input_x * spd, y, obj_en)) x += input_x * spd;
-    if (input_y != 0 and !wall_check(id, x, y + input_y * spd)
-        and !place_meeting(x, y + input_y * spd, obj_en)) y += input_y * spd;
 }
 
 if (input_check_pressed(ctrl.restart)) obj_game_manager.restart_game();

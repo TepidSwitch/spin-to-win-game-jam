@@ -38,10 +38,14 @@ is_dead = false;
 // Knockback
 kb_x = 0;
 kb_y = 0;
-kb_friction = 0.5 // tunable
+kb_friction = 0.75 // tunable
+
+// Stun
+stun_timer = 0;
+stun_duration = 18;
 
 // Helper Methods
-take_damage = function(_attacker_x, _attacker_y) {
+take_damage = function(_attacker_x, _attacker_y, _kb_force = 8) {
     if (invincible) exit;
         
     hp--;
@@ -52,12 +56,13 @@ take_damage = function(_attacker_x, _attacker_y) {
     
     invincible = true;
     inv_timer = hit_inv_duration;
+    stun_timer = stun_duration;
     
     var _dx = x - _attacker_x;
     var _dy = y - _attacker_y;
     var _len = point_distance(0, 0, _dx, _dy);
     if (_len > 0) {
-        kb_x = (_dx / _len) * 6;
-        kb_y = (_dy / _len) * 6;
+        kb_x = (_dx / _len) * _kb_force;
+        kb_y = (_dy / _len) * _kb_force;
     }
 }
