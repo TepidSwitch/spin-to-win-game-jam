@@ -22,7 +22,7 @@ if (_hit != noone and !_hit.is_dodging) {
         // otherwise push the enemy out of the player
         var _push_dir = point_direction(_hit.x, _hit.y, x, y);
         var _push_dist = 0;
-        var _max_push = 32
+        var _max_push = sprite_width + _hit.sprite_width;
         
         while (instance_place(x, y, obj_player) != noone and _push_dist < _max_push) {
             x += lengthdir_x(1, _push_dir);
