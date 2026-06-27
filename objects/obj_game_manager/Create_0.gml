@@ -3,6 +3,7 @@ if (instance_number(obj_game_manager) > 1) {
     exit;
 }
 
+window_set_size(1280, 704);
 display_set_gui_size(640, 352);
 
 is_paused = false;
@@ -78,6 +79,47 @@ controls = {
     move_up:    [ord("W"), vk_up],
     move_down:  [ord("S"), vk_down],
     dodge:      [ord("J"), vk_space],
+    confirm:    [vk_space, vk_enter],
     pause:      [ord("P"), vk_escape],
     restart:    [ord("R")],
 }
+
+// Menu Commands
+pause_menu = noone;
+
+start_game = function() {
+    is_paused = false;
+    if (instance_exists(pause_menu)) instance_destroy(pause_menu);
+    
+    current_level = 0;
+    if (instance_exists(obj_player)) {
+        obj_player.hp = obj_player.HP_DEFAULT;
+        obj_player.is_dead = false;
+    }
+    
+    room_goto(rm_1);
+};
+
+goto_menu = function() {
+    is_paused = false;
+    if (instance_exists(pause_menu)) instance_destroy(pause_menu);
+    if (instance_exists(obj_player)) instance_destroy(obj_player);
+    
+    current_level = 0;
+    room_goto(rm_menu);
+};
+
+quit_game = function() {
+    game_end();
+};
+
+pause_game = function() {
+    is_paused = true;
+    pause_menu = instance_create_depth(0, 0, -1000, obj_menu_pause);
+};
+
+resume_game = function() {
+    is_paused = false;
+    if (instance_exists(pause_menu)) instance_destroy(pause_menu);
+    if (instance_exists(obj_player)) obj_player.charge_needs_repress = true;
+};
