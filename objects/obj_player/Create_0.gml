@@ -46,6 +46,7 @@ stun_duration = 18;
 
 // Status Effects
 move_flip = false;
+dodge_effect = "none"; // "none", "short", "reverse", "wobble"
 
 // Helper Methods
 take_damage = function(_attacker_x, _attacker_y, _kb_force = 8) {

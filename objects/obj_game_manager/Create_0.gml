@@ -47,14 +47,22 @@ levels = [
             { type: obj_en_boss, x: 500, y: 176 },
         ]
     },
-    //5
+    // 5
     {
         player_x: 100, player_y: 176,
         door_x:   570, door_y:   176,
         enemies: [
             { type: obj_en_magician, x: 350, y: 176 }
         ]
-    }
+    },
+    // 6
+    {
+        player_x: 100, player_y: 176,
+        door_x:   570, door_y:   176,
+        enemies: [
+            { type: obj_en_gambler, x: 350, y: 176 }
+        ]
+    },
 ];
 
 load_level = function(_index) {

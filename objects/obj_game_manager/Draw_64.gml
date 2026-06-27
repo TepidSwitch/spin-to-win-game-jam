@@ -20,7 +20,7 @@ draw_set_valign(fa_top);
 // HUD Background
 draw_set_color(c_black);
 draw_set_alpha(0.65);
-draw_rectangle(0, 0, 120, 50, false);
+draw_rectangle(0, 0, 180, 80, false);
 draw_set_alpha(1);
 
 // HP - filled and empty circles
@@ -87,4 +87,25 @@ if (os_browser != browser_not_a_browser and !_mouse_detected) {
     draw_set_color(c_white);
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);
+}
+
+// Gambler effect indicator
+var _p = obj_player;
+if (instance_exists(_p) and _p.dodge_effect != "none") {
+    var _effect_colors = {
+        short:   c_yellow,
+        reverse: c_red,
+        wobble:  make_color_rgb(255, 128, 0)
+    };
+    var _col = _effect_colors[$ _p.dodge_effect];
+    if (!is_undefined(_col)) {
+        draw_set_color(_col);
+        draw_circle(8, 65, 5, false); // left of HUD, below stamina bar
+        draw_set_halign(fa_left);
+        draw_set_valign(fa_middle);
+        draw_text(16, 65, "NEXT DODGE: " + string_upper(_p.dodge_effect));
+        draw_set_halign(fa_left);
+        draw_set_valign(fa_top);
+        draw_set_color(c_white);
+    }
 }

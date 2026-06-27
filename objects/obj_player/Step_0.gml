@@ -69,6 +69,17 @@ if (stun_timer <= 0) {
                 dodge_timer = charged_dodge_dur;
             }
             
+            // Consume gambler effect
+            // TODO: perhaps define this in the enemy and transmit it. Now we have an enemy's effect defined in the player
+            if (dodge_effect == "reverse") {
+                dir = (dir + 180) mod 360;
+            } else if (dodge_effect == "short") {
+                dodge_spd = max(1, floor(dodge_spd * 0.5));
+            } else if (dodge_effect == "wobble") {
+                dir = (dir + 90) mod 360;
+            }
+            dodge_effect = "none";
+            
             inv_timer = dodge_timer;
             charge_timer = 0;
         }

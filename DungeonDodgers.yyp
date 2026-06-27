@@ -44,6 +44,8 @@
     {"id":{"name":"obj_en_chaser","path":"objects/obj_en_chaser/obj_en_chaser.yy",},},
     {"id":{"name":"obj_en_defender_atk","path":"objects/obj_en_defender_atk/obj_en_defender_atk.yy",},},
     {"id":{"name":"obj_en_defender","path":"objects/obj_en_defender/obj_en_defender.yy",},},
+    {"id":{"name":"obj_en_gambler_atk","path":"objects/obj_en_gambler_atk/obj_en_gambler_atk.yy",},},
+    {"id":{"name":"obj_en_gambler","path":"objects/obj_en_gambler/obj_en_gambler.yy",},},
     {"id":{"name":"obj_en_magician_atk","path":"objects/obj_en_magician_atk/obj_en_magician_atk.yy",},},
     {"id":{"name":"obj_en_magician","path":"objects/obj_en_magician/obj_en_magician.yy",},},
     {"id":{"name":"obj_en","path":"objects/obj_en/obj_en.yy",},},
