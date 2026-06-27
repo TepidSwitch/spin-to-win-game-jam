@@ -1,5 +1,8 @@
 event_inherited();
 
+strafe_spd = 2.5;
+idle_duration = 30;
+
 on_attacking = function() {
     move_with_collision(attack_spd, attack_dir);
         

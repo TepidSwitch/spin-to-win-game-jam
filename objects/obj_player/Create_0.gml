@@ -1,4 +1,4 @@
-spd = 3;
+spd = 2.2;
 dir = 0; // facing direction (0=right, 90=up, 180=left, 270=down)
 
 

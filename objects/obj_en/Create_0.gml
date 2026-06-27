@@ -10,6 +10,7 @@ telegraph_duration  = 20;
 attack_duration     = 20;
 attack_spd          = 6;
 return_spd          = 3;
+strafe_spd          = 0;
 
 attack_dir  = 0; // Locked in when telegraph starts
 start_x     = x;
@@ -17,6 +18,10 @@ start_y     = y;
 
 // Helper Methods
 on_idle = function() {
+    if (strafe_spd > 0) {
+        var _step = clamp(target.y - y, -strafe_spd, strafe_spd);
+        if (!wall_check(id, x, y + _step)) y += _step;
+    }
     if (state_timer <= 0) {
         state = "telegraph";
         state_timer = telegraph_duration;

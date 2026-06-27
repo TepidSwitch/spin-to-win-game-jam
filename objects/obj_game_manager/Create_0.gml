@@ -17,7 +17,7 @@ levels = [
         player_x: 96, player_y: 160,
         door_x: 545, door_y: 128,
         enemies: [
-            { type: obj_en, x: 480, y: 160 },
+            { type: obj_en_blocker, x: 500, y: 176 },
         ]
     },
     // 2
@@ -25,8 +25,8 @@ levels = [
         player_x: 96, player_y: 160,
         door_x: 545, door_y: 128,
         enemies: [
-            { type: obj_en_chaser, x: 448, y: 138 },
-            { type: obj_en_chaser, x: 448, y: 200 },
+            { type: obj_en_chaser, x: 430, y: 110 },
+            { type: obj_en_chaser, x: 430, y: 210 },
         ]
     },
     // 3 
@@ -34,11 +34,19 @@ levels = [
         player_x: 96, player_y: 160,
         door_x: 545, door_y: 128,
         enemies: [
-            { type: obj_en_chaser, x: 448, y: 96 },
-            { type: obj_en_defender, x: 512, y: 160 },
-            { type: obj_en_chaser, x: 448, y: 224 },
+            { type: obj_en_chaser,    x: 400, y: 100 },
+            { type: obj_en_chaser,    x: 400, y: 220 },
+            { type: obj_en_defender,  x: 490, y: 160 },
         ]
-    }, 
+    },
+    // 4
+    {
+        player_x: 96, player_y: 176,
+        door_x: 545, door_y: 144,
+        enemies: [
+            { type: obj_en_boss, x: 500, y: 176 },
+        ]
+    },
 ];
 
 load_level = function(_index) {

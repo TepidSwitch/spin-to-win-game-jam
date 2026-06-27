@@ -1,5 +1,7 @@
 event_inherited();
 
+strafe_spd = 1.5;
+
 // shield persists
 atk_obj = instance_create_layer(x, y, "Attacks", obj_en_defender_atk);
 atk_obj.creator = id;
