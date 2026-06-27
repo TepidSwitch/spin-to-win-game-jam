@@ -2,7 +2,9 @@ draw_set_font(fnt_default);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 draw_set_color(c_white);
-draw_text(display_get_gui_width() / 2, display_get_gui_height() / 2, "YOU DODGED ALL OF THOSE!\nheck yes :)\nPress R to go again");
+
+var _hint = (os_browser != browser_not_a_browser) ? "Tap to go again" : "Press R to go again";
+draw_text(display_get_gui_width() / 2, display_get_gui_height() / 2, "YOU DODGED ALL OF THOSE!\nheck yes :)\n" + _hint);
 
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);

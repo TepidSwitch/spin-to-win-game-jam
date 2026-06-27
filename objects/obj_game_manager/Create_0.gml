@@ -73,7 +73,7 @@ restart_game = function() {
     room_goto(rm_1);
 }
 
-// Input struct 
+// Keyboard Input Struct
 controls = {
     move_left:  [ord("A"), vk_left],
     move_right: [ord("D"), vk_right],
@@ -84,6 +84,25 @@ controls = {
     pause:      [ord("P"), vk_escape],
     restart:    [ord("R")],
 }
+
+// Touch Input Struct
+touch = {
+    move_x: 0,
+    move_y: 0,
+    dodge: false,
+    dodge_pressed: false,
+    dodge_released: false,
+    confirm_pressed: false,
+    pause_pressed: false,
+};
+
+// Internal touch tracking
+_touch_joy_dev      = -1;
+_touch_joy_ox       = 0;
+_touch_joy_oy       = 0;
+_touch_dodge_dev    = -1;
+_touch_dodge_prev   = false;
+_touch_pause_prev   = false;
 
 // Menu Commands
 pause_menu = noone;
