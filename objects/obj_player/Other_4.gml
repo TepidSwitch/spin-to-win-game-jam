@@ -1,4 +1,5 @@
 // Reset charge state
+move_flip = false;
 is_charging = false;
 charge_timer = 0;
 var dodge_held = input_check(obj_game_manager.controls.dodge);

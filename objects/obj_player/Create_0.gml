@@ -44,6 +44,9 @@ kb_friction = 0.75 // tunable
 stun_timer = 0;
 stun_duration = 18;
 
+// Status Effects
+move_flip = false;
+
 // Helper Methods
 take_damage = function(_attacker_x, _attacker_y, _kb_force = 8) {
     if (invincible) exit;

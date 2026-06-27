@@ -57,6 +57,7 @@ if (stun_timer <= 0) {
         if (dodge_released and is_charging) {
             is_charging = false;
             is_dodging = true;
+            move_flip = false;
             dodge_cd_timer = dodge_cd;
             invincible = true;
             
@@ -74,14 +75,22 @@ if (stun_timer <= 0) {
     }
     
     if (!is_dodging and !is_charging) {
-        // Does not pass through enemies when moving normally
         var input_x = input_check(ctrl.move_right) - input_check(ctrl.move_left);
-        var input_y = input_check(ctrl.move_down) - input_check(ctrl.move_up);
-        
-        if (input_x != 0 or input_y != 0) {
-            dir = point_direction(0, 0, input_x, input_y)
+        var input_y = input_check(ctrl.move_down)  - input_check(ctrl.move_up);
+    
+        if (move_flip) {
+            if (input_x == 0 and input_y == 0) {
+                move_flip = false;
+            } else {
+                input_x = -input_x;
+                input_y = -input_y;
+            }
         }
-        
+    
+        if ((input_x != 0 or input_y != 0) and stun_timer <= 0) {
+            dir = point_direction(0, 0, input_x, input_y);
+        }
+    
         if (input_x != 0 and !wall_check(id, x + input_x * spd, y)
             and !place_meeting(x + input_x * spd, y, obj_en)) x += input_x * spd;
         if (input_y != 0 and !wall_check(id, x, y + input_y * spd)

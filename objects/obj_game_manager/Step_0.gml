@@ -87,7 +87,26 @@ _touch_dodge_prev = _dodge_held;
 _touch_pause_prev = _pause_held;
 
 // The Rest
-if (debug_mode) show_debug_overlay(true);
+if (debug_mode) {
+    //show_debug_overlay(true);
+    if (room == rm_1) {
+        for (var _i = 0; _i < min(9, array_length(levels)); _i++) {
+            if (keyboard_check_pressed(ord(string(_i + 1)))) {
+                if (instance_exists(obj_player)) {
+                    obj_player.hp              = obj_player.HP_DEFAULT;
+                    obj_player.is_dead         = false;
+                    obj_player.is_dodging      = false;
+                    obj_player.is_charging     = false;
+                    obj_player.charge_timer    = 0;
+                    obj_player.invincible      = false;
+                    obj_player.stun_timer      = 0;
+                }
+                current_level = _i;
+                load_level(current_level);
+            }
+        }
+    }
+}
 
 if (room != rm_menu and (input_check_pressed(controls.pause) or touch.pause_pressed)) {
     if (is_paused) resume_game(); else pause_game();

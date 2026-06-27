@@ -23,15 +23,32 @@ draw_circle(cx, cy, radius, false);
 var charge_percent = clamp(charge_timer / charge_time_needed, 0, 1);
 var marker_dir = dir;
 if (is_charging) {
-    
     marker_dir = (current_time * (0.4 + charge_percent * 1.2)) mod 360;
 }
+
+// Spinning dot
 draw_set_color(c_black);
 draw_circle(
     cx + lengthdir_x(sprite_width * 0.75, marker_dir),
     cy + lengthdir_y(sprite_width * 0.75, marker_dir),
-    3,
-    false);
+    3, false);
+
+// Direction triangle while charging
+if (is_charging) {
+    var tri_dist = sprite_width;
+    var tdx = cx + lengthdir_x(tri_dist, dir);
+    var tdy = cy + lengthdir_y(tri_dist, dir);
+    draw_set_color(c_yellow);
+    draw_triangle(
+        tdx + lengthdir_x(6, dir),
+        tdy + lengthdir_y(6, dir),
+        tdx + lengthdir_x(5, dir + 130),
+        tdy + lengthdir_y(5, dir + 130),
+        tdx + lengthdir_x(5, dir - 130),
+        tdy + lengthdir_y(5, dir - 130),
+        false
+    );
+}
 
 // Charge bar
 if (is_charging) {
