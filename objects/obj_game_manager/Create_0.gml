@@ -103,6 +103,8 @@ _touch_joy_oy       = 0;
 _touch_dodge_dev    = -1;
 _touch_dodge_prev   = false;
 _touch_pause_prev   = false;
+_mouse_detected     = false;
+_prev_mouse_x       = device_mouse_x(0);
 
 // Menu Commands
 pause_menu = noone;

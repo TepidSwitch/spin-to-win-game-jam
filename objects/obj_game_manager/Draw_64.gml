@@ -46,7 +46,7 @@ draw_set_color(c_white);
 draw_text(8, 34, "STAMINA")
 
 // Touch controls overlay — HTML5 only
-if (os_browser != browser_not_a_browser) {
+if (os_browser != browser_not_a_browser and !_mouse_detected) {
     draw_set_font(fnt_default);
 
     // Joystick outer ring
