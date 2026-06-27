@@ -50,9 +50,9 @@ take_damage = function(_attacker_x, _attacker_y, _kb_force = 8) {
         
     hp--;
     
+    charge_needs_repress = is_charging or input_check(obj_game_manager.controls.dodge);
     is_charging = false;
     charge_timer = 0;
-    charge_needs_repress = true;
     
     invincible = true;
     inv_timer = hit_inv_duration;

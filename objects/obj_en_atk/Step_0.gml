@@ -16,8 +16,12 @@ if (_hit != noone and !_hit.is_dodging and instance_exists(id)) {
     var _push_dist = 0;
     var _max_push = 32;
     while (instance_place(x, y, obj_player) != noone and _push_dist < _max_push) {
-        _hit.x += lengthdir_x(1, _push_dir);
-        _hit.y += lengthdir_y(1, _push_dir);
+        var _nx = _hit.x + lengthdir_x(1, _push_dir);
+        var _ny = _hit.y + lengthdir_y(1, _push_dir);
+        if (wall_check(_hit, _nx, _ny)) break;
+            
+        _hit.x = _nx;
+        _hit.y = _ny;
         _push_dist++;
     }
 }
