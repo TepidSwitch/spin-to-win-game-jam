@@ -80,12 +80,6 @@ if (stun_timer <= 0) {
         
         if (input_x != 0 or input_y != 0) {
             dir = point_direction(0, 0, input_x, input_y)
-        } else {
-            // face away from nearest enemy when standing still
-            if (instance_exists(obj_en)) {
-                var nearest = instance_nearest(x, y, obj_en);
-                dir = point_direction(nearest.x, nearest.y, x, y);
-            }
         }
         
         if (input_x != 0 and !wall_check(id, x + input_x * spd, y)
