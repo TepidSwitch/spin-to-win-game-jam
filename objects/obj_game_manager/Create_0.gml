@@ -54,6 +54,8 @@ add_shake = function(_mag, _dur) {
 
 current_level = 0;
 
+difficulty = 0; // 0 = Forgiving, 1 = Challenging, 2 = Expert
+
 levels = [
     // 1
     {
@@ -94,6 +96,7 @@ levels = [
     {
         player_x: 100, player_y: 176,
         door_x:   570, door_y:   176,
+        pickup: { x: 240, y: 176 },
         enemies: [
             { type: obj_en_magician, x: 350, y: 176 }
         ]
@@ -149,12 +152,24 @@ levels = [
             { type: obj_en_boss_2, x: 480, y: 176 },
         ]
     },
+    // 12
+    {
+        player_x: 96, player_y: 176,
+        door_x: 545, door_y: 176,
+        pickup: { x: 240, y: 176 },
+        enemies: [
+            { type: obj_en_boss_3,   x: 500, y: 176 },
+            { type: obj_en_magician, x: 280, y: 80  },
+            { type: obj_en_chaser,   x: 280, y: 270 },
+        ]
+    },
 ];
 
 load_level = function(_index) {
     with (obj_en) instance_destroy();
     with (obj_en_atk) instance_destroy();
     with (obj_door) instance_destroy();
+    with (obj_health_pickup) instance_destroy();
         
     var _lvl = levels[_index];
     
@@ -171,6 +186,15 @@ load_level = function(_index) {
     for (var i = 0; i < array_length(_enemies); i++) {
         var _e = _enemies[i];
         instance_create_layer(_e.x, _e.y, "Enemies", _e.type);
+    }
+    
+    if (variable_struct_exists(_lvl, "pickup")) {
+        var _spawn = false;
+        if (difficulty == 0) _spawn = true;
+        if (difficulty == 1 && _index == array_length(levels) - 1) _spawn = true;
+        if (_spawn) {
+            instance_create_layer(_lvl.pickup.x, _lvl.pickup.y, "Enemies", obj_health_pickup);
+        }
     }
 };
 
