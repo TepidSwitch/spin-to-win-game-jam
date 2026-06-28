@@ -1,4 +1,5 @@
 if (obj_game_manager.is_paused) exit;
+if (!obj_game_manager.world_active) exit;
 
 state_timer--;
 

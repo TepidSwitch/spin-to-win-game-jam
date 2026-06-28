@@ -1,4 +1,5 @@
 if (obj_game_manager.is_paused) exit;
+if (!obj_game_manager.world_active) exit;
 
 if (!instance_exists(creator)) {
     instance_destroy();
@@ -9,6 +10,10 @@ var _hit = instance_place(x, y, obj_player);
 if (_hit != noone and !_hit.invincible and is_active) {
     _hit.take_damage(x, y, kb_force);
     on_hit();
+}
+
+if (_hit != noone and is_active and _hit.is_dodging) {
+    _hit.nearmiss_armed = true;
 }
 
 if (_hit != noone and !_hit.is_dodging and instance_exists(id)) {

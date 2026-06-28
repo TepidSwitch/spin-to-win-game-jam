@@ -6,6 +6,8 @@ if (obj_game_manager.is_paused) {
     exit;
 }
 
+if (!obj_game_manager.world_active) exit;
+
 // HP
 if (hp <= 0 and !is_dead) {
     is_dead = true;
@@ -57,6 +59,7 @@ if (stun_timer <= 0) {
         if (dodge_released and is_charging) {
             is_charging = false;
             is_dodging = true;
+            nearmiss_armed = false;
             move_flip = false;
             dodge_cd_timer = dodge_cd;
             invincible = true;
@@ -121,7 +124,7 @@ if (is_dodging) {
     if (!wall_check(id, x + dx, y)) x += dx;
     if (!wall_check(id, x, y + dy)) y += dy;
         
-    if (dodge_timer <= 0) { 
+    if (dodge_timer <= 0) {
         is_dodging = false;
         
         // Don't get caught inside an enemy
@@ -140,6 +143,13 @@ if (is_dodging) {
                 y = ny;
                 push_dist++;
             }
+        }
+        
+        if (nearmiss_armed) {
+            var _haz        = instance_place(x, y, obj_en_atk);
+            var _blocked    = (_haz != noone and _haz.is_active);
+            if (!_blocked) obj_game_manager.on_near_miss();
+            nearmiss_armed = false;
         }
     }
         

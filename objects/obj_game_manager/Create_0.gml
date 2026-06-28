@@ -9,6 +9,47 @@ display_set_gui_size(640, 352);
 
 is_paused = false;
 
+// Let's get juicy
+freeze_timer = 0;
+slow_timer   = 0;
+slow_every   = 3;
+slow_phase   = 0;
+world_active = true;
+
+HITSTOP_HIT     = 8;
+SLOWMO_NEARMISS = 9;
+
+fx = {
+    hitstop:     true,
+    slowmo:      true,
+    screenshake: 1.0, // 0 = off, 1 = full
+};
+
+add_freeze = function(_f) {
+    if (!fx.hitstop) return;
+    freeze_timer = max(freeze_timer, _f);
+};
+
+start_slowmo = function(_f) {
+    if (!fx.slowmo) return;
+    slow_timer = max(slow_timer, _f);
+    slow_phase = 0;
+};
+
+on_near_miss = function() {
+    start_slowmo(SLOWMO_NEARMISS);
+};
+
+shake_timer = 0;
+shake_dur   = 1;
+shake_mag   = 0;
+
+add_shake = function(_mag, _dur) {
+    if (fx.screenshake <= 0 or _dur <= 0) return;
+    if (_dur > shake_timer) { shake_timer = _dur; shake_dur = _dur; }
+    shake_mag = max(shake_mag, _mag);
+};
+
 current_level = 0;
 
 levels = [
