@@ -63,6 +63,49 @@ levels = [
             { type: obj_en_gambler, x: 350, y: 176 }
         ]
     },
+    // 7
+    {
+        player_x: 100, player_y: 176,
+        door_x:   570, door_y:   176,
+        enemies: [
+            { type: obj_en_pinner, x: 350, y: 176 }
+        ]
+    },
+    // 8
+    {
+        player_x: 100, player_y: 176,
+        door_x:   570, door_y:   176,
+        enemies: [
+            { type: obj_en_pinner, x: 380, y: 176 },
+            { type: obj_en_chaser, x: 280, y: 110 },
+        ]
+    },
+    // 9
+    {
+        player_x: 100, player_y: 176,
+        door_x:   570, door_y:   176,
+        enemies: [
+            { type: obj_en_gambler, x: 280, y: 176 },
+            { type: obj_en_pinner,  x: 420, y: 176 },
+        ]
+    },
+    // 10
+    {
+        player_x: 100, player_y: 176,
+        door_x:   570, door_y:   176,
+        enemies: [
+            { type: obj_en_gambler,  x: 300, y: 176 },
+            { type: obj_en_magician, x: 440, y: 176 },
+        ]
+    },
+    // 11
+    {
+        player_x: 100, player_y: 176,
+        door_x:   570, door_y:   176,
+        enemies: [
+            { type: obj_en_boss_2, x: 480, y: 176 },
+        ]
+    },
 ];
 
 load_level = function(_index) {
