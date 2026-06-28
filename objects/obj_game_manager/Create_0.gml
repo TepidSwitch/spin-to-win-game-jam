@@ -9,6 +9,23 @@ if (os_browser == browser_not_a_browser) {
 }
 display_set_gui_size(640, 352);
 
+// Re-fit the HTML5 canvas/backbuffer to the browser, preserving aspect.
+html5_fit = function() {
+    if (os_browser == browser_not_a_browser) exit;
+    var _bw = max(1, browser_width);
+    var _bh = max(1, browser_height);
+    var _aspect = 640 / 352;
+    var _w, _h;
+    if (_bw / _bh > _aspect) { _h = _bh; _w = floor(_h * _aspect); } // pillarbox
+    else                     { _w = _bw; _h = floor(_w / _aspect); } // letterbox
+    if (window_get_width() != _w || window_get_height() != _h) {
+        window_set_size(_w, _h);
+        surface_resize(application_surface, _w, _h);
+    }
+    display_set_gui_size(640, 352); // keep HUD/menus in fixed 640×352 coords
+};
+html5_fit();
+
 is_paused = false;
 
 // Let's get juicy
