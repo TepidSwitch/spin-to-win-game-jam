@@ -3,8 +3,10 @@ if (instance_number(obj_game_manager) > 1) {
     exit;
 }
 
-window_set_size(1280, 704);
-window_set_position(30, 60);
+if (os_browser == browser_not_a_browser) {
+    window_set_size(1280, 704);
+    window_set_position(30, 60);
+}
 display_set_gui_size(640, 352);
 
 is_paused = false;
