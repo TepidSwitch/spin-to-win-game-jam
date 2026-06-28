@@ -1,6 +1,6 @@
 if (os_browser != browser_not_a_browser and !_mouse_detected) {
     var _mx = device_mouse_x(0);
-    if (_mx != _prev_mouse_x and !device_mouse_check_button(0, mb_left)) {
+    if (_mx != _prev_mouse_x and device_mouse_check_button(0, mb_left)) {
         _mouse_detected = true;
     }
     _prev_mouse_x = _mx;
