@@ -89,7 +89,7 @@ _touch_dodge_prev = _dodge_held;
 _touch_pause_prev = _pause_held;
 
 // The Rest
-if (debug_mode) {
+if (debug_mode and room == rm_1) {
     //show_debug_overlay(true);
 
     var _debug_keys = [
