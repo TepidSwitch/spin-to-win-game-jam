@@ -111,6 +111,11 @@ if (debug_mode and room == rm_1) {
             load_level(current_level);
         }
     }
+    // Photo mode
+    if (is_paused and keyboard_check_pressed(ord("H")) and instance_exists(obj_menu_pause)) {
+        obj_menu_pause.visible = !obj_menu_pause.visible;
+        photo_mode = !photo_mode;
+    }
 }
 
 

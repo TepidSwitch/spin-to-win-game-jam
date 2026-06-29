@@ -27,6 +27,7 @@ html5_fit = function() {
 html5_fit();
 
 is_paused = false;
+photo_mode = false;
 
 // Let's get juicy
 freeze_timer = 0;
@@ -293,6 +294,7 @@ pause_game = function() {
 
 resume_game = function() {
     is_paused = false;
+    photo_mode = false
     if (instance_exists(pause_menu)) instance_destroy(pause_menu);
     if (instance_exists(obj_player)) obj_player.charge_needs_repress = true;
 };

@@ -1,5 +1,5 @@
 // Collision debug overlay
-if (debug_mode) {
+if (debug_mode and !photo_mode) {
     with (all) {
         draw_set_alpha(0.4);
         draw_set_color(c_lime);
